@@ -38,7 +38,7 @@
 
     const query = `
 [out:json][timeout:180];
-area["name"="${city}"]["boundary"="administrative"]["admin_level"="6"]->.a;
+area["name"="${city}"]->.a;
 (
   node(area.a)[name];
   relation(area.a)[name];
