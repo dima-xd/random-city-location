@@ -175,14 +175,22 @@ out center;
       const isAndroid = userAgent.includes('android');
       const isIOS = /iphone|ipad|ipod/.test(userAgent);
 
-      let mapUrl = "";
-      if (isAndroid || isIOS) {
-        mapUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=12&l=map`;
+      let routeUrl = "";
+      if (coords) {
+        if (isAndroid || isIOS) {
+          routeUrl = `yandexmaps://maps.yandex.ru/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=mt`;
+        } else {
+          routeUrl = `https://yandex.ru/maps/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=mt`;
+        }
+        result += `<br/><a href="${routeUrl}" target="_blank">Open Navigation in Yandex Maps</a>`;
       } else {
-        mapUrl = `https://yandex.ru/maps/?pt=${lon},${lat}&z=12&l=map`;
+        if (isAndroid || isIOS) {
+          routeUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=12&l=map`;
+        } else {
+          routeUrl = `https://yandex.ru/maps/?pt=${lon},${lat}&z=12&l=map`;
+        }
+        result += `<br/><a href="${routeUrl}" target="_blank">Open in Yandex Maps</a>`;
       }
-
-      result += `<br/><a href="${mapUrl}" target="_blank">Open in Yandex Maps</a>`;
 
       setResult(result);
     } catch (error) {
