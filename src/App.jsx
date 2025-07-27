@@ -182,14 +182,14 @@ out center;
         } else {
           routeUrl = `https://yandex.ru/maps/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=mt`;
         }
-        result += `<br/><a href="${routeUrl}" target="_blank">Open Navigation in Yandex Maps</a>`;
+        result += `<br/><a target="_blank" href="${routeUrl}" target="_blank">Open Navigation in Yandex Maps</a>`;
       } else {
         if (isAndroid || isIOS) {
           routeUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=12&l=map`;
         } else {
           routeUrl = `https://yandex.ru/maps/?pt=${lon},${lat}&z=12&l=map`;
         }
-        result += `<br/><a href="${routeUrl}" target="_blank">Open in Yandex Maps</a>`;
+        result += `<br/><a target="_blank" href="${routeUrl}" target="_blank">Open in Yandex Maps</a>`;
       }
 
       setResult(result);
