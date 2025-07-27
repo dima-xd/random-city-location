@@ -171,7 +171,17 @@ out center;
         result += `<br/>Distance to: ${dist} km`;
       }
 
-      const mapUrl = `https://yandex.ru/maps/?pt=${lon},${lat}&z=12&l=map`;
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isAndroid = userAgent.includes('android');
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
+
+      let mapUrl = "";
+      if (isAndroid || isIOS) {
+        mapUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=12&l=map`;
+      } else {
+        mapUrl = `https://yandex.ru/maps/?pt=${lon},${lat}&z=12&l=map`;
+      }
+
       result += `<br/><a href="${mapUrl}" target="_blank">Open in Yandex Maps</a>`;
 
       setResult(result);
