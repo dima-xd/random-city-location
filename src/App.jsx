@@ -9,6 +9,18 @@ export default function RandomLocation() {
 
   const cacheRef = useRef({});
 
+  const options = {
+    enableHighAccuracy: true,
+  };
+
+  navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+      },
+      () => {},
+      options
+  );
+
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     let R = 6371;
     let dLat = deg2rad(lat2 - lat1);
@@ -178,9 +190,9 @@ out center;
       let routeUrl = "";
       if (coords) {
         if (isAndroid || isIOS) {
-          routeUrl = `yandexmaps://maps.yandex.ru/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=mt`;
+          routeUrl = `yandexmaps://maps.yandex.ru/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=pd`;
         } else {
-          routeUrl = `https://yandex.ru/maps/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=mt`;
+          routeUrl = `https://yandex.ru/maps/?rtext=${coords.lat},${coords.lon}~${lat},${lon}&rtt=pd`;
         }
         result += `<br/><a target="_blank" href="${routeUrl}" target="_blank">Open Navigation in Yandex Maps</a>`;
       } else {
